@@ -40,6 +40,21 @@ namespace Chirp.Radio
             this.DataContext = _viewModel;
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            var playButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+            if (BackgroundAudioPlayer.Instance.PlayerState == PlayState.Playing)
+            {
+                playButton.Text = "Stop";
+                playButton.IconUri = new Uri("/Images/pause.png", UriKind.Relative);
+            }
+            else
+            {
+                playButton.Text = "Play";
+                playButton.IconUri = new Uri("/Images/play.png", UriKind.Relative);
+            }
+        }
+
         void timer_Tick(object sender, EventArgs e)
         {
             _requestHelper.GetUpdatedPlaylist();
@@ -78,7 +93,6 @@ namespace Chirp.Radio
 
             if (BackgroundAudioPlayer.Instance.PlayerState == PlayState.Playing)
             {
-
                 playButton.Text = "Play";
                 playButton.IconUri = new Uri("/Images/play.png", UriKind.Relative);
                 BackgroundAudioPlayer.Instance.Stop();
