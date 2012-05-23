@@ -1,0 +1,78 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Chirp.Radio.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--Pivot Control-->
+        <controls:Pivot Title="CHIRP RADIO">
+            <!--Pivot item one-->
+            <controls:PivotItem Header="now playing">
+                <Grid>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0, 0, 10, 0" Text="song:"></TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CurrentTrack.Track}"></TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0, 0, 10, 0" Text="by:"></TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CurrentTrack.Artist}"></TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="0" Margin="0, 0, 10, 0" Text="from the record:"></TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding CurrentTrack.Release}"></TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="0" Margin="0, 0, 10, 0" Text="put out by:"></TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding CurrentTrack.Label}"></TextBlock>
+                        </Grid>
+                        <Image Source="{Binding CurrentTrack.ImageLarge}"></Image>
+                    </StackPanel>
+                </Grid>
+            </controls:PivotItem>
+
+            <!--Pivot item two-->
+            <controls:PivotItem Header="recent">
+                <Grid>
+                    <ListBox x:Name="RecentTracksListBox" ItemsSource="{Binding RecentTracks}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:Name="SongDataTemplate">
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding ImageSmall}" Width="34" Height="34" Margin="10, 0, 10, 10"></Image>
+                                        <StackPanel Margin="0,0,1,0" Orientation="Horizontal" VerticalAlignment="Top" >
+                                            <TextBlock Margin="0,0,1,0" Foreground="#999" TextWrapping="Wrap" Text="{Binding Artist}" d:LayoutOverrides="Width"/>
+                                            <TextBlock Margin="10,0,1,0" Foreground="#fff" TextWrapping="Wrap" Text="{Binding Track}" d:LayoutOverrides="Width"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </controls:PivotItem>
+        </controls:Pivot>
+    </Grid>
+ 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/play.png" Text="Play" x:Name="PlayButton" Click="PlayButton_Click_1"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
