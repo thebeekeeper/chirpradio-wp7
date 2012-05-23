@@ -32,14 +32,14 @@
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0" Margin="0, 0, 10, 0" Text="song:"></TextBlock>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CurrentTrack.Track}"></TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="0" Margin="0, 0, 10, 0" Text="by:"></TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CurrentTrack.Artist}"></TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="0" Margin="0, 0, 10, 0" Text="from the record:"></TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding CurrentTrack.Release}"></TextBlock>
-                                <TextBlock Grid.Row="3" Grid.Column="0" Margin="0, 0, 10, 0" Text="put out by:"></TextBlock>
-                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding CurrentTrack.Label}"></TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Foreground="#fcfc77" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Text="song"></TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Foreground="#fff" Text="{Binding CurrentTrack.Track}"></TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Foreground="#999" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Text="by"></TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Foreground="#999" Text="{Binding CurrentTrack.Artist}"></TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="0" Foreground="#fcfc77" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Text="from the record"></TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Foreground="#fff" Text="{Binding CurrentTrack.Release}"></TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="0" Foreground="#999" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Text="put out by"></TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Foreground="#999" Text="{Binding CurrentTrack.Label}"></TextBlock>
                         </Grid>
                         <Image Source="{Binding CurrentTrack.ImageLarge}"></Image>
                     </StackPanel>
