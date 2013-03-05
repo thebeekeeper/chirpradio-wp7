@@ -36,6 +36,13 @@ namespace Chirp.Radio.Agent
             }
         }
 
+        public void SetCurrentTrack(string artistName, string trackName, string album)
+        {
+            BackgroundAudioPlayer.Instance.Track.BeginEdit();
+            _track = new AudioTrack(new Uri("http://www.live365.com/play/chirpradio", UriKind.Absolute), trackName, artistName, album, null);
+            BackgroundAudioPlayer.Instance.Track.EndEdit();
+        }
+
         /// <summary>
         /// Called when the playstate changes, except for the Error state (see OnError)
         /// </summary>
@@ -128,14 +135,14 @@ namespace Chirp.Radio.Agent
                     player.Position = (TimeSpan)param;
                     break;
                 case UserAction.SkipNext:
-                    player.Track = GetNextTrack();
+                    //player.Track = GetNextTrack();
                     break;
                 case UserAction.SkipPrevious:
-                    AudioTrack previousTrack = GetPreviousTrack();
-                    if (previousTrack != null)
-                    {
-                        player.Track = previousTrack;
-                    }
+                    //AudioTrack previousTrack = GetPreviousTrack();
+                    //if (previousTrack != null)
+                    //{
+                    //    player.Track = previousTrack;
+                    //}
                     break;
             }
 
@@ -157,8 +164,9 @@ namespace Chirp.Radio.Agent
         private AudioTrack GetNextTrack()
         {
             var uri = new Uri("http://www.live365.com/play/chirpradio", UriKind.Absolute);
-            AudioTrack track = new AudioTrack(uri, "none", "none", "none", null);
+            AudioTrack track = new AudioTrack(uri, "chrip", "radio", "", null, "", EnabledPlayerControls.Pause);
             return track;
+            //return _track;
         }
 
 
@@ -175,9 +183,26 @@ namespace Chirp.Radio.Agent
         private AudioTrack GetPreviousTrack()
         {
             var uri = new Uri("http://www.live365.com/play/chirpradio", UriKind.Absolute);
-            AudioTrack track = new AudioTrack(uri, "none", "none", "none", null);
+            AudioTrack track = new AudioTrack(uri, "chrip", "radio", "none", null, "", EnabledPlayerControls.Pause);
             return track;
+            //return _track;
         }
+
+        /// <summary>
+        /// this is no good!  i think the json api stuff has to move in here so that it 
+        /// runs in the background.  the front-end should be bound to the current track
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="artist"></param>
+        /// <param name="album"></param>
+        /// <param name="image"></param>
+        //public void SetTrackMetadata(string title, string artist, string album, string image)
+        //{
+        //    BackgroundAudioPlayer.Instance.Track.Title = title;
+        //    BackgroundAudioPlayer.Instance.Track.Artist = artist;
+        //    BackgroundAudioPlayer.Instance.Track.Album = album;
+        //    BackgroundAudioPlayer.Instance.Track.AlbumArt = new Uri(image, UriKind.Absolute);
+        //}
 
         /// <summary>
         /// Called whenever there is an error with playback, such as an AudioTrack not downloading correctly
@@ -214,5 +239,7 @@ namespace Chirp.Radio.Agent
         {
 
         }
+
+        private AudioTrack _track;
     }
 }

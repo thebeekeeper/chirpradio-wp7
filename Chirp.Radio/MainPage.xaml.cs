@@ -64,6 +64,12 @@ namespace Chirp.Radio
         {
             _viewModel.CurrentTrack = args.CurrentTrack;
             _viewModel.RecentTracks.Clear();
+            //if (BackgroundAudioPlayer.Instance.Track != null)
+            //{
+            //    BackgroundAudioPlayer.Instance.Track.BeginEdit();
+            //    BackgroundAudioPlayer.Instance.Track.Title = "asdf";
+            //    BackgroundAudioPlayer.Instance.Track.EndEdit();
+            //}
             foreach (var t in args.PreviousTracks)
             {
                 _viewModel.RecentTracks.Add(t);
@@ -79,7 +85,23 @@ namespace Chirp.Radio
                     Debug.WriteLine("Track ready");
                     break;
                 case PlayState.BufferingStarted:
+                    _viewModel.Busy = true;
                     Debug.WriteLine("Buffering");
+                    break;
+                case PlayState.BufferingStopped:
+                    _viewModel.Busy = false;
+                    break;
+                case PlayState.Paused:
+                case PlayState.Stopped:
+                    var playButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+                    playButton.Text = "Play";
+                    playButton.IconUri = new Uri("/Images/play.png", UriKind.Relative);
+                    break;
+                case PlayState.Playing:
+                    _viewModel.Busy = false;
+                    playButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+                    playButton.Text = "Stop";
+                    playButton.IconUri = new Uri("/Images/pause.png", UriKind.Relative);
                     break;
                 default:
                     Debug.WriteLine(playState);
@@ -99,6 +121,7 @@ namespace Chirp.Radio
             }
             else
             {
+                _viewModel.Busy = true;
                 playButton.Text = "Stop";
                 playButton.IconUri = new Uri("/Images/pause.png", UriKind.Relative);
                 BackgroundAudioPlayer.Instance.Play();
@@ -106,6 +129,5 @@ namespace Chirp.Radio
         }
 
         private PlaylistViewModel _viewModel;
-        private PlaylistRequestHelper _requestHelper;
-    }
+        private PlaylistRequestHelper _requestHelper;    }
 }

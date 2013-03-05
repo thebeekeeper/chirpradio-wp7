@@ -42,6 +42,16 @@ namespace Chirp.Radio
             }
         }
 
+        public bool Busy
+        {
+            get { return _busy; }
+            set
+            {
+                _busy = value;
+                RaisePropertyChanged("Busy");
+            }
+        }
+
         public ICommand LoadDataCommand
         {
             get { return this._loadDataCommand; }
@@ -66,5 +76,6 @@ namespace Chirp.Radio
         private ObservableCollection<Song> _playlist;
         private Song _currentTrack;
         private ICommand _loadDataCommand;
+        private bool _busy;
     }
 }

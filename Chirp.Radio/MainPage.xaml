@@ -14,7 +14,11 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+	<shell:SystemTray.ProgressIndicator>
+		<shell:ProgressIndicator IsIndeterminate="True" IsVisible="{Binding Busy}" Text="contacting mothership"></shell:ProgressIndicator>
+	</shell:SystemTray.ProgressIndicator>
+
+	<Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
         <controls:Pivot Title="CHIRP RADIO">
             <!--Pivot item one-->
