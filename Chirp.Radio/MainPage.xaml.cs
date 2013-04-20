@@ -101,7 +101,7 @@ namespace Chirp.Radio
                     Debug.WriteLine("Buffering");
                     break;
                 case PlayState.BufferingStopped:
-                    _viewModel.Busy = false;
+                    //_viewModel.Busy = false;
                     break;
                 case PlayState.Paused:
                 case PlayState.Stopped:
@@ -130,6 +130,7 @@ namespace Chirp.Radio
                 playButton.Text = "Play";
                 playButton.IconUri = new Uri("/Images/play.png", UriKind.Relative);
                 BackgroundAudioPlayer.Instance.Stop();
+                
             }
             else
             {
