@@ -39,7 +39,7 @@ namespace Chirp.Radio.Agent
         public void SetCurrentTrack(string artistName, string trackName, string album)
         {
             BackgroundAudioPlayer.Instance.Track.BeginEdit();
-            _track = new AudioTrack(new Uri("http://www.live365.com/play/chirpradio", UriKind.Absolute), trackName, artistName, album, null);
+            _track = new AudioTrack(new Uri("http://chirpradio.org/stream", UriKind.Absolute), trackName, artistName, album, null);
             BackgroundAudioPlayer.Instance.Track.EndEdit();
         }
 
