@@ -7,6 +7,7 @@ namespace Chirp.Radio.Agent
     public class AudioPlayer : AudioPlayerAgent
     {
         private static volatile bool _classInitialized;
+        private static Uri _streamUri = new Uri("http://chirpradio.org/stream", UriKind.Absolute);
 
         /// <remarks>
         /// AudioPlayer instances can share the same process. 
@@ -39,7 +40,7 @@ namespace Chirp.Radio.Agent
         public void SetCurrentTrack(string artistName, string trackName, string album)
         {
             BackgroundAudioPlayer.Instance.Track.BeginEdit();
-            _track = new AudioTrack(new Uri("http://www.live365.com/play/chirpradio", UriKind.Absolute), trackName, artistName, album, null);
+            _track = new AudioTrack(_streamUri, trackName, artistName, album, null);
             BackgroundAudioPlayer.Instance.Track.EndEdit();
         }
 
@@ -163,7 +164,7 @@ namespace Chirp.Radio.Agent
         /// <returns>an instance of AudioTrack, or null if the playback is completed</returns>
         private AudioTrack GetNextTrack()
         {
-            var uri = new Uri("http://www.live365.com/play/chirpradio", UriKind.Absolute);
+            var uri = _streamUri;
             AudioTrack track = new AudioTrack(uri, "chrip", "radio", "", null, "", EnabledPlayerControls.Pause);
             return track;
             //return _track;
@@ -182,7 +183,7 @@ namespace Chirp.Radio.Agent
         /// <returns>an instance of AudioTrack, or null if previous track is not allowed</returns>
         private AudioTrack GetPreviousTrack()
         {
-            var uri = new Uri("http://www.live365.com/play/chirpradio", UriKind.Absolute);
+            var uri = _streamUri;
             AudioTrack track = new AudioTrack(uri, "chrip", "radio", "none", null, "", EnabledPlayerControls.Pause);
             return track;
             //return _track;

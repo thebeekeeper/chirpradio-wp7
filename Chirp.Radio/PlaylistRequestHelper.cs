@@ -50,7 +50,14 @@ namespace Chirp.Radio
             }
             else
             {
-                throw new Exception("Unable to retrieve playlist");
+                if(RequestCompleted != null)
+                {
+                    RequestCompleted(this, new RequestCompletedEventArgs() { Error = e.Error.Message });
+                }
+                else
+                {
+                    throw new Exception("Unable to retrieve playlist");
+                }
             }
         }
 
@@ -59,6 +66,8 @@ namespace Chirp.Radio
 
     public class RequestCompletedEventArgs
     {
+        public string Error { get; set; }
+        
         public Song CurrentTrack { get; set; }
         public IList<Song> PreviousTracks { get; set; }
     }

@@ -21,15 +21,19 @@ namespace Chirp.Radio
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private DispatcherTimer timer;
+
         public MainPage()
         {
             InitializeComponent();
             BackgroundAudioPlayer.Instance.PlayStateChanged += new EventHandler(Instance_PlayStateChanged);
 
-            DispatcherTimer timer = new DispatcherTimer();
+            timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Tick += new EventHandler(timer_Tick);
-            timer.Start();
+            // delay starting the timer until we get the first response so we don't get multiple
+            // error boxes if there's no internet connection
+            //timer.Start();
 
             _requestHelper = new PlaylistRequestHelper();
             _requestHelper.RequestCompleted += new RequestCompletedHandler(requestHelper_RequestCompleted);
@@ -62,6 +66,14 @@ namespace Chirp.Radio
 
         void requestHelper_RequestCompleted(object sender, RequestCompletedEventArgs args)
         {
+            if (String.IsNullOrEmpty(args.Error) == false)
+            {
+                MessageBox.Show("Can't connect to the internet.  Make sure you have a network connection and try again");
+                timer.Stop();
+                
+                return;
+            }
+            timer.Start();
             _viewModel.CurrentTrack = args.CurrentTrack;
             _viewModel.RecentTracks.Clear();
             //if (BackgroundAudioPlayer.Instance.Track != null)
@@ -89,7 +101,7 @@ namespace Chirp.Radio
                     Debug.WriteLine("Buffering");
                     break;
                 case PlayState.BufferingStopped:
-                    _viewModel.Busy = false;
+                    //_viewModel.Busy = false;
                     break;
                 case PlayState.Paused:
                 case PlayState.Stopped:
@@ -118,6 +130,7 @@ namespace Chirp.Radio
                 playButton.Text = "Play";
                 playButton.IconUri = new Uri("/Images/play.png", UriKind.Relative);
                 BackgroundAudioPlayer.Instance.Stop();
+                
             }
             else
             {
@@ -129,5 +142,7 @@ namespace Chirp.Radio
         }
 
         private PlaylistViewModel _viewModel;
-        private PlaylistRequestHelper _requestHelper;    }
+        private PlaylistRequestHelper _requestHelper;
+
+    }
 }
