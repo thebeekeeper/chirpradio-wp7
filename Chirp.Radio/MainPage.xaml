@@ -36,16 +36,16 @@
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0" Foreground="#fcfc77" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Text="song"></TextBlock>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Foreground="#fff" Text="{Binding CurrentTrack.Track}"></TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="0" Foreground="#999" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Text="by"></TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Foreground="#999" Text="{Binding CurrentTrack.Artist}"></TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="0" Foreground="#fcfc77" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Text="from the record"></TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="1" Foreground="#fff" Text="{Binding CurrentTrack.Release}"></TextBlock>
-                                <TextBlock Grid.Row="3" Grid.Column="0" Foreground="#999" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Text="put out by"></TextBlock>
-                                <TextBlock Grid.Row="3" Grid.Column="1" Foreground="#999" Text="{Binding CurrentTrack.Label}"></TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="0" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Style="{StaticResource PhoneTextAccentStyle}" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Text="song"></TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding CurrentTrack.Track}"></TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="0" FontFamily="{StaticResource PhoneFontFamilySemiBold}" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Text="by"></TextBlock>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding CurrentTrack.Artist}"></TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="0" FontFamily="{StaticResource PhoneFontFamilySemiBold}"  Style="{StaticResource PhoneTextAccentStyle}" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Text="from the record"></TextBlock>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding CurrentTrack.Release}"></TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="0" FontFamily="{StaticResource PhoneFontFamilySemiBold}" HorizontalAlignment="Right" Margin="0, 0, 10, 0" Text="put out by"></TextBlock>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding CurrentTrack.Label}"></TextBlock>
                         </Grid>
-                        <Image Source="{Binding CurrentTrack.ImageLarge}"></Image>
+                        <Image Source="{Binding CurrentTrack.ImageLarge}" Width="300" Height="300" Margin="0, 40, 0, 0"></Image>
                     </StackPanel>
                 </Grid>
             </controls:PivotItem>
@@ -60,8 +60,8 @@
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="{Binding ImageSmall}" Width="34" Height="34" Margin="10, 0, 10, 10"></Image>
                                         <StackPanel Margin="0,0,1,0" Orientation="Horizontal" VerticalAlignment="Top" >
-                                            <TextBlock Margin="0,0,1,0" Foreground="#999" TextWrapping="Wrap" Text="{Binding Artist}" d:LayoutOverrides="Width"/>
-                                            <TextBlock Margin="10,0,1,0" Foreground="#fff" TextWrapping="Wrap" Text="{Binding Track}" d:LayoutOverrides="Width"/>
+                                            <TextBlock Margin="0,0,1,0" FontFamily="{StaticResource PhoneFontFamilySemiLight}" TextWrapping="Wrap" Text="{Binding Artist}" d:LayoutOverrides="Width"/>
+                                            <TextBlock Margin="10,0,1,0" FontFamily="{StaticResource PhoneFontFamilySemiBold}" TextWrapping="Wrap" Text="{Binding Track}" d:LayoutOverrides="Width"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>

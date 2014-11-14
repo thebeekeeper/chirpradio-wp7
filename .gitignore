@@ -2,6 +2,13 @@
 bin
 obj
 
+# nuget
+packages
+# wp8 testing
+PerfLogs
+# project update
+Backup1
+
 # mstest test results
 TestResults
 

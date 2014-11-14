@@ -12,6 +12,7 @@ namespace Chirp.Radio
         {
             this.lastfm_urls = new Images() { sm_image = "Images/tape.png" };
         }
+
         public string Track
         {
             get
@@ -87,7 +88,7 @@ namespace Chirp.Radio
             get 
             {
                 if(this.lastfm_urls.large_image == null)
-                    return "Images/bird.png";
+                    return "Images/album-art.png";
                 return this.lastfm_urls.large_image; 
             }
             //get { return this._imageLarge; }
