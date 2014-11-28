@@ -15,3 +15,6 @@ TestResults
 *~
 *.swp
 *.suo
+UpgradeLog.htm
+Thumbs.db
+*.csproj.user
